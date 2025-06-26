@@ -5,14 +5,12 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style="dark" translucent backgroundColor="transparent" />
-      <Stack >
+      <Stack>
         <Stack.Screen
           name="(tabs)"
           options={{ headerShown: false }}
         />
-
-
-      </Stack>;
+      </Stack>
     </>
   );
 }

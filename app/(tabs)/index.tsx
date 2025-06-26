@@ -1,10 +1,9 @@
 import { fetchProductByBarcode, ProductInfo, searchProductsByName } from '@/api/openFoodFacts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { Camera, CameraView } from 'expo-camera';
 import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 export default function Index() {
   const navigation = useNavigation();
@@ -17,6 +16,7 @@ export default function Index() {
   const [error, setError] = useState('');
   const [searching, setSearching] = useState(false);
   const [userAllergens, setUserAllergens] = useState<string[]>([]);
+  const [showScanText, setShowScanText] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -34,17 +34,41 @@ export default function Index() {
     }, [])
   );
 
+  useEffect(() => {
+    setShowScanText(true); 
+    const timer = setTimeout(() => setShowScanText(false), 5000);
+    return () => clearTimeout(timer);
+  }, [scanned]); 
+
   const handleBarCodeScanned = async ({ data }: { type: string; data: string }) => {
     setScanned(true);
     setError('');
-    const result = await fetchProductByBarcode(data);
-    if (result) {
-      setProduct(result);
-      setBarcode(data);
-    } else {
-      setError('❌ Product not found.');
-      setProduct(null);
-      setTimeout(() => setScanned(false), 5000); // <-- auto reset after 5s
+
+    try {
+      // Step 1: check cache
+      const cachedProduct = await AsyncStorage.getItem(`product_${data}`);
+      if (cachedProduct) {
+        const parsed = JSON.parse(cachedProduct);
+        setProduct(parsed);
+        setBarcode(data);
+        return;
+      }
+
+      // Step 2: fetch from API
+      const result = await fetchProductByBarcode(data);
+      if (result) {
+        setProduct(result);
+        setBarcode(data);
+        // Step 3: cache the result
+        await AsyncStorage.setItem(`product_${data}`, JSON.stringify(result));
+      } else {
+        setError('❌ Product not found.');
+        setProduct(null);
+        setTimeout(() => setScanned(false), 5000); 
+      }
+    } catch (err) {
+      setError('❌ Error while scanning product.');
+      console.error(err);
     }
   };
 
@@ -116,7 +140,9 @@ export default function Index() {
         {/* Scan box overlay */}
         <View style={styles.scanBoxContainer}>
           <View style={styles.scanBox}>
-            <Text style={styles.scanBoxText}>Place the barcode inside the box</Text>
+            {showScanText && (
+              <Text style={styles.scanBoxText}>Place the barcode inside the box</Text>
+            )}
           </View>
         </View>
 
@@ -130,7 +156,8 @@ export default function Index() {
             <TouchableOpacity
               activeOpacity={1}
               style={[styles.productOverlay, { paddingTop: 40 }]}
-              onPress={e => e.stopPropagation()}
+              // onPress={e => e.stopPropagation()}
+              onPress={() => {}}
             >
               {/* X button */}
               <TouchableOpacity
@@ -167,7 +194,7 @@ export default function Index() {
             <TouchableOpacity
               activeOpacity={1}
               style={styles.productOverlay}
-              onPress={e => e.stopPropagation()} // Zorgt dat klikken op de overlay zelf niet sluit
+              onPress={e => e.stopPropagation()} 
             >
               {/* X-knop rechtsboven */}
               <TouchableOpacity

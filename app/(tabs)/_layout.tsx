@@ -31,16 +31,6 @@ const _layout = () => {
         >
 
             <Tabs.Screen
-                name="tab"
-                options={{
-                    title: 'tab',
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                        <FontAwesome name='user' size={30} color="#201E1F" />
-                    )
-                }}
-            />
-            <Tabs.Screen
                 name="index"
                 options={{
                     title: 'Home',
@@ -52,16 +42,7 @@ const _layout = () => {
                 }}
             />
 
-            <Tabs.Screen
-                name="profile"
-                options={{
-                    title: 'Profile',
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                        <FontAwesome name='user' size={30} color="#201E1F" />
-                    )
-                }}
-            />
+
             <Tabs.Screen
                 name="setting"
                 options={{
