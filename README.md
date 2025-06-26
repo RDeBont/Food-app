@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+Allergy Scanner App – React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 🤖 Allergy Scanner App – React Native 📱
 
-## Get started
+[![React Native](https://img.shields.io/badge/React%20Native-Expo-blue?logo=react)](https://reactnative.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android-lightgrey?logo=apple&logoColor=white)]()
+[![API Connected](https://img.shields.io/badge/API-Barcode%20%26%20Allergy%20Checker-orange)]()
 
-1. Install dependencies
+## 📝 About this project
 
+This is my **first React Native application**, created to learn how to:
+
+- 📡 Work with external APIs
+- ⚛️ Understand React Native using **Expo**
+- 📷 Integrate barcode scanning
+- ⚠️ Automatically check for allergens in scanned products
+
+### 📱 How does it work?
+
+1. You select your allergies (e.g., gluten, lactose, peanuts, etc.)
+2. Scan the **barcode** of a product
+3. The app fetches the **ingredients using an API**
+4. If the product contains an ingredient you're allergic to → you’ll get an alert ✅
+
+## 🚀 Quick Start (with Expo)
+
+You only need **Node.js** to get started!
+
+### ✅ Requirements
+
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- Expo CLI  
+  Install with:
+  ```bash
+  npm install -g expo-cli
+  ```
+- Expo Go app on your phone (iOS or Android)
+
+### 📦 Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/allergy-scanner.git
+   cd allergy-scanner
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Install additional Expo libraries**
+   Used for the barcode scanner:
+   ```bash
+   npx expo install expo-barcode-scanner
+   ```
 
+4. **Start the project**
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+5. **Scan the QR code**  
+   Use the Expo Go app on your phone to run the app immediately.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🔧 Technologies Used
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+| Technology           | Description                                       |
+|----------------------|---------------------------------------------------|
+| React Native (Expo)  | For building the app                              |
+| Expo Barcode Scanner | For scanning product barcodes                     |
+| Fetch / Axios        | For fetching data from an API                     |
+| React Navigation     | (Optional) for navigating between screens         |
 
-## Get a fresh project
+## 📚 What I Learned
 
-When you're ready, run:
+- ✅ How to build an app using React Native (via Expo)
+- ✅ How to use an external API to fetch and process data
+- ✅ How to implement a barcode scanner in an app
+- ✅ How to use logic to detect allergens
 
-```bash
-npm run reset-project
-```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
