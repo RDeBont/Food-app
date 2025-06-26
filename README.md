@@ -70,7 +70,7 @@ You only need **Node.js** to get started!
 |----------------------|---------------------------------------------------|
 | React Native (Expo)  | For building the app                              |
 | Expo Barcode Scanner | For scanning product barcodes                     |
-| Fetch / Axios        | For fetching data from an API                     |
+| Fetch                | For fetching data from an API                     |
 | React Navigation     | (Optional) for navigating between screens         |
 
 ## 📚 What I Learned
